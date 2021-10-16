@@ -1,0 +1,41 @@
+#eureka
+eureka:
+  client:
+    service-url-defaultZone: http://localhost:8761/eureka
+
+#server
+server:
+  port: 8082
+
+#spring
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      # cross origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedHeaders: "*"
+            allowedOrigins: "http://localhost:4200"
+            allowedMethods: "*"
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://www.googleapis.com/robot/v1/metadata/jwk/securetoken@system.gserviceaccount.com
+          issuer-uri: https://securetoken.google.com/my-eshop-18096
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
+
+
+firebase:
+  credential:
+    resource-path: serviceAccountKey.json
+
